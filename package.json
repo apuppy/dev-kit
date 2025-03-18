@@ -1,6 +1,6 @@
 {
-  "name": "wxt-vue-starter",
-  "description": "manifest.json description",
+  "name": "dev-kit-starter",
+  "description": "browser dev kit for programmers",
   "private": true,
   "version": "0.0.0",
   "type": "module",
