@@ -60,7 +60,16 @@ const locateJSON = () => {
   try {
     const parsed = JSON.parse(raw);
     const result = JSONPath({ path: path, json: parsed });
-    prettyJSONResult.value = JSON.stringify(result, null, 2);
+    // set prettyJSONResult to JSON.stringify() raw result
+    // prettyJSONResult.value = JSON.stringify(result, null, 2);
+
+    // set prettyJSONResult based on the result length, if only one result, show the first one, otherwise show all.
+    prettyJSONResult.value = JSON.stringify(
+      result.length === 1 ? result[0] : result,
+      null,
+      2
+    );
+
     clearError();
   } catch (error: any) {
     showError("Invalid JSON or JSONPath.");
@@ -248,6 +257,7 @@ textarea {
 
 #locate-control input[type="text"] {
   margin-top: 5px;
+  margin-bottom: 5px;
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
