@@ -1,13 +1,10 @@
 <script lang="ts" setup>
 import HelloWorld from "@/components/HelloWorld.vue";
 
-document.addEventListener("DOMContentLoaded", function () {
-  const openJsonParserButton = document.getElementById("openJsonParser");
-  openJsonParserButton.addEventListener("click", function () {
-    const extensionUrl = chrome.runtime.getURL("json-parser.html");
-    chrome.tabs.create({ url: extensionUrl });
-  });
-});
+const openJsonParser = () => {
+  const jsonParserUrl = chrome.runtime.getURL("json-parser.html");
+  chrome.tabs.create({ url: jsonParserUrl });
+};
 </script>
 
 <template>
@@ -17,6 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
       id="openJsonParser"
       class="entry"
       value="Json Parser"
+      @click="openJsonParser"
     />
   </div>
   <HelloWorld msg="WXT + Vue" />

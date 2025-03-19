@@ -14,7 +14,7 @@ const rawJSON = ref("");
 const prettyJSONResult = ref("");
 const errorMessage = ref("");
 const jsonPath = ref("");
-const showPathInput = ref(false);
+const showPathInput = ref(true);
 
 const showError = (message: string) => {
   errorMessage.value = message;
@@ -85,12 +85,32 @@ const copyLeft = () => {
 const copyRight = () => {
   navigator.clipboard.writeText(prettyJSONResult.value);
 };
+
+const insertSampleJSON = () => {
+  rawJSON.value = JSON.stringify(
+    {
+      string: "Hello, world!",
+      number: 42,
+      boolean: true,
+      null: null,
+      array: [1, "two", false, null],
+      object: {
+        nestedString: "Nested Hello",
+        nestedNumber: 123,
+        nestedArray: [1, 2, 3],
+      },
+    },
+    null,
+    2
+  );
+};
 </script>
 
 <template>
   <div class="container">
     <div class="panel left-panel">
       <div class="panel-header">
+        <button @click="insertSampleJSON">Sample JSON</button>
         <button @click="copyLeft">Copy</button>
       </div>
       <textarea v-model="rawJSON"></textarea>
@@ -125,12 +145,19 @@ const copyRight = () => {
 <style scoped>
 .container {
   display: flex;
-  width: 80%;
+  flex-direction: column;
+  width: 100%;
   max-width: 1200px;
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   padding: 20px;
+}
+
+@media (min-width: 768px) {
+  .container {
+    flex-direction: row;
+  }
 }
 
 .panel {
@@ -140,25 +167,48 @@ const copyRight = () => {
 }
 
 .left-panel {
-  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+@media (min-width: 768px) {
+  .left-panel {
+    margin-right: 10px;
+    margin-bottom: 0;
+  }
 }
 
 .right-panel {
-  margin-left: 10px;
+  margin-top: 10px;
+}
+
+@media (min-width: 768px) {
+  .right-panel {
+    margin-left: 10px;
+    margin-top: 0;
+  }
 }
 
 .panel-header {
   margin-bottom: 10px;
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
 }
 
 textarea {
   width: 100%;
-  height: 400px;
+  height: 200px;
   padding: 10px;
   border: 1px solid #ccc;
   box-sizing: border-box;
   font-family: monospace;
   font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  textarea {
+    height: 400px;
+  }
 }
 
 .controls {
