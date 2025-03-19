@@ -3,7 +3,7 @@ import JsonParser from "@/components/JsonParser.vue";
 </script>
 
 <template>
-  <JsonParser msg="json parser area" />
+  <JsonParser msg="json parser page" />
 </template>
 
 <style scoped>

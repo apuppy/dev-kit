@@ -15,6 +15,7 @@
     "postinstall": "wxt prepare"
   },
   "dependencies": {
+    "jsonpath-plus": "^10.3.0",
     "vue": "^3.5.12"
   },
   "devDependencies": {
