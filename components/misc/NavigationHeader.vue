@@ -48,10 +48,10 @@ nav {
 
 button {
   padding: 8px 15px;
-  border: 1px solid #ccc;
+  border: 1px solid #dde3ea;
   cursor: pointer;
-  &.active {
-    background-color: #eee;
-  }
+}
+.active {
+  background-color: rgba(195, 202, 210);
 }
 </style>
