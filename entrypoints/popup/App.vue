@@ -5,6 +5,11 @@ const openJsonParser = () => {
   const jsonParserUrl = chrome.runtime.getURL("json-parser.html");
   chrome.tabs.create({ url: jsonParserUrl });
 };
+
+const openMiscTools = () => {
+  const miscToolsUrl = chrome.runtime.getURL("misc-tools.html");
+  chrome.tabs.create({ url: miscToolsUrl });
+};
 </script>
 
 <template>
@@ -15,6 +20,13 @@ const openJsonParser = () => {
       class="entry"
       value="Json Parser"
       @click="openJsonParser"
+    />
+    <input
+      type="button"
+      id="openMisc"
+      class="entry"
+      value="Misc Tools"
+      @click="openMiscTools"
     />
   </div>
   <HelloWorld msg="WXT + Vue" />
