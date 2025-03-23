@@ -7,7 +7,7 @@
     </div>
     <div class="output-group">
       <label for="formatted-sql">Formatted SQL:</label>
-      <textarea id="formatted-sql" :value="formattedSql" readonly></textarea>
+      <pre id="formatted-sql" v-html="highlightedSql" @click="selectAllContent"></pre>
     </div>
     <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div>
   </div>
@@ -16,21 +16,33 @@
 <script setup lang="ts">
 import { ref, watch, onMounted } from "vue";
 import { format } from "sql-formatter";
+import hljs from "highlight.js/lib/core";
+import sql from "highlight.js/lib/languages/sql";
+import "highlight.js/styles/github.css";
+
+hljs.registerLanguage("sql", sql);
 
 const rawSql = ref("");
 const formattedSql = ref("");
+const highlightedSql = ref("");
 const errorMessage = ref("");
 
 // init a sample sql
 rawSql.value =
   "SELECT d.department_name, COUNT(e.employee_id) AS total_employees, AVG(e.salary) AS average_salary FROM employees e JOIN departments d ON e.department_id = d.department_id WHERE e.hire_date >= '2023-01-01' AND e.salary > 50000 GROUP BY d.department_name HAVING COUNT(e.employee_id) > 2 ORDER BY average_salary DESC LIMIT 5;";
 
+const highlightSql = (sql: string) => {
+  return hljs.highlight(sql, { language: "sql" }).value;
+};
+
 onMounted(() => {
   try {
     formattedSql.value = format(rawSql.value);
+    highlightedSql.value = highlightSql(formattedSql.value);
     errorMessage.value = "";
   } catch (error: any) {
     formattedSql.value = "";
+    highlightedSql.value = "";
     errorMessage.value = error.message || "Error formatting SQL.";
   }
 });
@@ -38,12 +50,27 @@ onMounted(() => {
 watch(rawSql, (newRawSql) => {
   try {
     formattedSql.value = format(newRawSql);
+    highlightedSql.value = highlightSql(formattedSql.value);
     errorMessage.value = "";
   } catch (error: any) {
     formattedSql.value = "";
+    highlightedSql.value = "";
     errorMessage.value = error.message || "Error formatting SQL.";
   }
 });
+
+const selectAllContent = (event: Event) => {
+  const element = event.target as HTMLElement;
+  if (element) {
+    const range = document.createRange();
+    range.selectNodeContents(element);
+    const selection = window.getSelection();
+    if (selection) {
+      selection.removeAllRanges();
+      selection.addRange(range);
+    }
+  }
+};
 </script>
 
 <style scoped>
@@ -81,8 +108,16 @@ textarea {
   resize: horizontal;
 }
 
-#formatted-sql {
+pre {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  overflow: auto;
   min-height: 300px;
+  background-color: #f9f9f9;
+  font-size: 0.8rem; /* Increased font size */
 }
 
 .error-message {

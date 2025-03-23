@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h2 class="title">Base64 / MD5</h2>
+    <h2 class="title">Base64</h2>
     <div class="input-group">
       <label for="raw-text">Raw Text:</label>
       <textarea id="raw-text" v-model="rawText" spellcheck="false"></textarea>
@@ -13,6 +13,7 @@
       <label for="base64-text">Base64 Text:</label>
       <textarea id="base64-text" v-model="base64Text" spellcheck="false"></textarea>
     </div>
+    <h2 class="title">MD5</h2>
     <div class="input-group">
       <label for="md5-input">Input MD5ed String:</label>
       <input type="text" id="md5-input" v-model="md5Input" @keyup.enter="md5Encode" spellcheck="false" />
