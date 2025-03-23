@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <h2>Base64 / MD5</h2>
+  <div class="container">
+    <h2 class="title">Base64 / MD5</h2>
     <div class="input-group">
       <label for="raw-text">Raw Text:</label>
       <textarea id="raw-text" v-model="rawText" spellcheck="false"></textarea>
@@ -11,32 +11,18 @@
     </div>
     <div class="input-group">
       <label for="base64-text">Base64 Text:</label>
-      <textarea
-        id="base64-text"
-        v-model="base64Text"
-        spellcheck="false"
-      ></textarea>
+      <textarea id="base64-text" v-model="base64Text" spellcheck="false"></textarea>
     </div>
     <div class="input-group">
       <label for="md5-input">Input MD5ed String:</label>
-      <input
-        type="text"
-        id="md5-input"
-        v-model="md5Input"
-        @keyup.enter="md5Encode"
-        spellcheck="false"
-      />
+      <input type="text" id="md5-input" v-model="md5Input" @keyup.enter="md5Encode" spellcheck="false" />
     </div>
     <div class="button-group">
       <button @click="md5Encode">➡️ md5</button>
     </div>
     <div class="input-group">
       <label for="md5-result">MD5 Result:</label>
-      <textarea
-        id="md5-result"
-        v-model="md5Result"
-        spellcheck="false"
-      ></textarea>
+      <textarea id="md5-result" v-model="md5Result" spellcheck="false"></textarea>
     </div>
   </div>
 </template>
@@ -69,8 +55,21 @@ const md5Encode = () => {
 </script>
 
 <style scoped>
+.container {
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
 .input-group,
-.output-group {
+.button-group {
   margin-bottom: 15px;
 }
 
@@ -84,6 +83,7 @@ input[type="text"] {
   width: 100%;
   padding: 8px;
   border: 1px solid #ccc;
+  border-radius: 4px;
   box-sizing: border-box;
 }
 
@@ -91,6 +91,20 @@ input[type="text"] {
   display: flex;
   gap: 10px;
   margin-bottom: 10px;
+}
+
+button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #42b983;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #38a169;
 }
 
 .output-group div {

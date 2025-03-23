@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <h2>SQL Formatter</h2>
+  <div class="container">
+    <h2 class="title">SQL Formatter</h2>
     <div class="input-group">
       <label for="raw-sql">Raw SQL:</label>
       <textarea id="raw-sql" v-model="rawSql"></textarea>
@@ -14,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from "vue";
+import { ref, watch, onMounted } from "vue";
 import { format } from "sql-formatter";
 
 const rawSql = ref("");
@@ -47,7 +47,19 @@ watch(rawSql, (newRawSql) => {
 </script>
 
 <style scoped>
-/* Similar styles as other panels */
+.container {
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
 .input-group,
 .output-group {
   margin-bottom: 15px;
@@ -62,6 +74,7 @@ textarea {
   width: 100%;
   padding: 8px;
   border: 1px solid #ccc;
+  border-radius: 4px;
   box-sizing: border-box;
   overflow: auto;
   min-height: 80px;

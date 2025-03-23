@@ -44,14 +44,24 @@ const props = defineProps<{ activePanel: string }>();
 nav {
   display: flex;
   gap: 10px;
+  padding: 10px;
 }
 
 button {
-  padding: 8px 15px;
-  border: 1px solid #dde3ea;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #42b983;
+  color: white;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
-.active {
-  background-color: rgba(195, 202, 210);
+
+button:hover {
+  background-color: #064d27;
+}
+
+button.active {
+  background-color: #064d27;
 }
 </style>

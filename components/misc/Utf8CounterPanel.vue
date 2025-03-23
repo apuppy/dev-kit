@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <h2>UTF8 Counter</h2>
+  <div class="container">
+    <h2 class="title">UTF8 Counter</h2>
     <div class="input-group">
       <label for="text-to-count">Text:</label>
       <textarea id="text-to-count" v-model="text"></textarea>
@@ -39,7 +39,19 @@ const storageSize = computed(() => {
 </script>
 
 <style scoped>
-/* Similar styles as other panels */
+.container {
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
 .input-group {
   margin-bottom: 15px;
 }
@@ -53,6 +65,7 @@ textarea {
   width: 100%;
   padding: 8px;
   border: 1px solid #ccc;
+  border-radius: 4px;
   box-sizing: border-box;
 }
 

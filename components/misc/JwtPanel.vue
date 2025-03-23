@@ -1,37 +1,34 @@
 <template>
-  <div>
-    <h2>JWT Decoder</h2>
+  <div class="container">
+    <h2 class="title">JWT Decoder</h2>
     <div class="grid-container">
       <div class="input-group">
-        <div class="input-group">
-          <label for="jwt-token">JWT Token:</label>
-          <textarea id="jwt-token" v-model="jwtToken"></textarea>
-        </div>
-        <div class="input-group">
-          <label for="jwt-secret">JWT Secret:</label>
-          <input
-            id="jwt-secret"
-            type="text"
-            v-model="secretKey"
-            @keyup.enter="decodeJwtToken(jwtToken)"
-          />
-        </div>
+        <label for="jwt-token">JWT Token:</label>
+        <textarea id="jwt-token" v-model="jwtToken"></textarea>
+        <label for="jwt-secret">JWT Secret:</label>
+        <input
+          id="jwt-secret"
+          type="text"
+          v-model="secretKey"
+          @keyup.enter="decodeJwtToken(jwtToken)"
+        />
         <div v-if="warnMessage" class="warn-message">{{ warnMessage }}</div>
-        <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div>
+      <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div>
       </div>
+      
       <div class="output-group">
-        <label for="jwt-payload">Decoded Header:</label>
-        <textarea id="jwt-payload" v-model="decodedHeader"></textarea>
+        <label for="jwt-header">Decoded Header:</label>
+        <textarea id="jwt-header" v-model="decodedHeader" readonly></textarea>
 
         <label for="jwt-payload">Decoded Payload:</label>
-        <textarea id="jwt-payload" v-model="decodedPayload"></textarea>
+        <textarea id="jwt-payload" v-model="decodedPayload" readonly></textarea>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from "vue";
+import { ref, watch, onMounted } from "vue";
 import { jwtDecode, JwtHeader } from "jwt-decode";
 import * as KJUR from "jsrsasign";
 
@@ -75,7 +72,6 @@ const decodeJwtToken = (newJwtToken: string) => {
         warnMessage.value = "";
       }
       console.log("JWT validation result: ", valid, errorMsg);
-      alert;
     } catch (error: any) {
       console.log(error);
       decodedHeader.value = "";
@@ -104,6 +100,19 @@ const verifyJwtSignature = (
 </script>
 
 <style scoped>
+.container {
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
 .grid-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -120,12 +129,13 @@ label {
   margin-bottom: 5px;
 }
 
-textarea {
+textarea,
+input[type="text"] {
   width: 100%;
   padding: 8px;
   border: 1px solid #ccc;
+  border-radius: 4px;
   box-sizing: border-box;
-  min-height: 200px;
 }
 
 textarea {
@@ -134,11 +144,14 @@ textarea {
   padding: 10px;
   white-space: pre-wrap;
   font-family: monospace;
+  min-height: 100px;
 }
+
 .warn-message {
   color: #ff9966;
   margin-top: 10px;
 }
+
 .error-message {
   color: red;
   margin-top: 10px;
