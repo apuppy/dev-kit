@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import HelloWorld from "@/components/HelloWorld.vue";
-
 const openJsonParser = () => {
   const jsonParserUrl = chrome.runtime.getURL("json-parser.html");
   chrome.tabs.create({ url: jsonParserUrl });
@@ -29,7 +27,6 @@ const openMiscTools = () => {
       @click="openMiscTools"
     />
   </div>
-  <HelloWorld msg="WXT + Vue" />
 </template>
 
 <style scoped>
