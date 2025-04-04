@@ -1,19 +1,17 @@
 <template>
-  <div class="container">
-    <header>
-      <NavigationHeader
-        @panel-selected="currentPanel = $event"
-        :active-panel="currentPanel"
-      />
-    </header>
-    <main>
-      <Base64Md5Panel v-if="currentPanel === 'base64/md5'" />
-      <DateTimePanel v-if="currentPanel === 'datetime'" />
-      <SQLFormatterPanel v-if="currentPanel === 'sql-formatter'" />
-      <Utf8CounterPanel v-if="currentPanel === 'utf8-counter'" />
-      <JwtPanel v-if="currentPanel === 'jwt'" />
-    </main>
-  </div>
+<div class="container">
+  <header>
+    <NavigationHeader @panel-selected="currentPanel = $event" :active-panel="currentPanel" />
+  </header>
+  <main>
+    <Base64Md5Panel v-if="currentPanel === 'base64/md5'" />
+    <DateTimePanel v-if="currentPanel === 'datetime'" />
+    <SQLFormatterPanel v-if="currentPanel === 'sql-formatter'" />
+    <Utf8CounterPanel v-if="currentPanel === 'utf8-counter'" />
+    <JwtPanel v-if="currentPanel === 'jwt'" />
+    <UrlParsePanel v-if="currentPanel === 'url-parser'" />
+  </main>
+</div>
 </template>
 
 <script setup lang="ts">
@@ -25,6 +23,8 @@ import DateTimePanel from "@/components/misc/DateTimePanel.vue";
 import SQLFormatterPanel from "@/components/misc/SQLFormatterPanel.vue";
 import Utf8CounterPanel from "@/components/misc/Utf8CounterPanel.vue";
 import JwtPanel from "@/components/misc/JwtPanel.vue";
+import UrlParsePanel from "@/components/misc/UrlParsePanel.vue";
+
 
 const currentPanel = ref("base64/md5");
 </script>
