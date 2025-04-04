@@ -3,7 +3,7 @@
     <h2 class="title">URL Parser</h2>
     <div class="input-group">
         <label for="url-input">Enter URL:</label>
-        <input id="url-input" type="text" v-model="url" placeholder="https://example.com:8080/path?key=value" />
+        <input id="url-input" type="text" v-model="url" placeholder="https://example.com:8080/path?key=value" @keyup.enter="parseUrl" />
         <button @click="parseUrl">Parse URL</button>
     </div>
     <div v-if="parsedUrl" class="output-group">
